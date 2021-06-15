@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	subscription = "ORDERS.scratch"
+	subscription = "ORDERS.sandbox"
 	consumerName = "nats-consumer"
 )
 
@@ -31,6 +31,7 @@ func run(ctx context.Context) error {
 	}
 	select {
 	case <-js.PublishAsyncComplete():
+		log.Println("publish async complete")
 	case <-time.After(5 * time.Second):
 		return errors.New("publish did not resolve in time")
 	}
