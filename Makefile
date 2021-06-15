@@ -9,3 +9,7 @@ nats/server/start:
 .PHONY: nats/server/stop
 nats/server/stop:
 	docker rm -f $(NATS_CONTAINER_NAME)
+
+.PHONY: run
+run:
+	go run ./main.go
