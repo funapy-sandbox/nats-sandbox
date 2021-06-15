@@ -16,7 +16,6 @@ const (
 )
 
 func run(ctx context.Context) error {
-	// Connect to a server
 	nc, err := nats.Connect(nats.DefaultURL)
 	if err != nil {
 		return fmt.Errorf("failed to connect: %w", err)
@@ -35,7 +34,7 @@ func run(ctx context.Context) error {
 	case <-time.After(5 * time.Second):
 		return errors.New("publish did not resolve in time")
 	}
-	// Simple Pull Consumer
+
 	sub, err := js.PullSubscribe(subscription, consumerName)
 	if err != nil {
 		return fmt.Errorf("failed to create subscription: %w", err)
