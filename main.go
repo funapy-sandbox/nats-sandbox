@@ -12,7 +12,7 @@ import (
 
 const (
 	subscription = "ORDERS.sandbox"
-	consumerName = "nats-consumer"
+	consumerName = "NATS-CONSUMER"
 )
 
 func run(ctx context.Context) error {
@@ -24,6 +24,11 @@ func run(ctx context.Context) error {
 	js, err := nc.JetStream(nats.PublishAsyncMaxPending(256))
 	if err != nil {
 		return fmt.Errorf("failed to apply: %w", err)
+	}
+
+	_, err = js.Publish(subscription, []byte("aaa"))
+	if err != nil {
+		return fmt.Errorf("failed to publish: %w", err)
 	}
 
 	for i := 0; i < 10; i++ {
